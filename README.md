@@ -26,9 +26,6 @@ The Gym & Fitness Membership Management System is a comprehensive platform desig
 - **Notifications:** In-app notification system to alert users about membership expiries, class updates, and waitlist promotions.
 - **Reviews & Ratings:** Members can submit reviews and rate trainers or classes.
 
-## Screenshots
-
-![Dashboard/App View](Screenshot%20(21).png)
 
 ## Technologies Used
 - **Backend:** Node.js, Express.js, MongoDB (Mongoose)
