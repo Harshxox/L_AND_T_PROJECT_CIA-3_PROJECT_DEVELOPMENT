@@ -11,7 +11,58 @@
 ---
 
 ## Project Overview
-The Gym & Fitness Membership Management System is a comprehensive platform designed to handle the daily operations of a modern fitness center. Built with a Node.js/Express backend and an Angular frontend, it streamlines membership administration, class scheduling, trainer assignments, equipment tracking, and member progress logging.
+The **Gym & Fitness Membership Management System** is a comprehensive, full-stack enterprise web application designed to handle the daily operations of a modern fitness center. Built with a Node.js/Express backend and an Angular frontend, it streamlines membership administration, class scheduling, trainer assignments, equipment tracking, and member progress logging.
+
+---
+
+## 📸 Application Demo & Screenshots
+
+### 🎥 Interactive Browser Walkthrough
+![GymLand Interactive Walkthrough](docs/screenshots/00_app_walkthrough.webp)
+
+---
+
+### 1. Authentication & Role-Based Onboarding
+Dual authentication system with instant role demo quick-fills, password hashing, and JWT-backed session tokens.
+![Authentication & Onboarding](docs/screenshots/01_login_onboarding.png)
+
+---
+
+### 2. Member Telemetry Dashboard
+Real-time dashboard reflecting active membership tier, attendance counter, trainer balances, and quick actions.
+![Member Dashboard](docs/screenshots/02_member_dashboard.png)
+
+---
+
+### 3. Class Scheduling & Trainer Bookings
+Interactive schedule with category filtering (Strength, Cardio, Yoga, HIIT), real-time capacity indicators, and instant spot reservations.
+![Classes and PT Schedule](docs/screenshots/03_classes_and_pt_schedule.png)
+
+---
+
+### 4. Membership Plans & Simulated Checkout
+Transparent tiered pricing with live coupon code validation (`WELCOME50` for 50% discount) and simulated instant invoice generation.
+![Plans and Shop](docs/screenshots/04_plans_and_checkout.png)
+
+---
+
+### 5. Digital Turnstile QR Security Pass
+Dynamic security QR token generator for contact-free entry turnstile scanning and automated attendance verification.
+![Digital QR Pass](docs/screenshots/05_digital_qr_pass.png)
+
+---
+
+### 6. Body Transformation & Progress Tracker
+Personal fitness metric logging with weight milestones, body fat analysis, and structured workout regime logging.
+![Progress & Routine Tracker](docs/screenshots/06_progress_tracker.png)
+
+---
+
+### 7. Real-Time Account Updates & Membership Lifecycle
+Automated state updates reflecting upgraded memberships, extended validity dates, and instant membership freeze/unfreeze controls.
+![Updated Dashboard](docs/screenshots/07_dashboard_updated.png)
+
+---
 
 ## Modules
 
@@ -26,12 +77,15 @@ The Gym & Fitness Membership Management System is a comprehensive platform desig
 - **Notifications:** In-app notification system to alert users about membership expiries, class updates, and waitlist promotions.
 - **Reviews & Ratings:** Members can submit reviews and rate trainers or classes.
 
+---
 
 ## Technologies Used
 - **Backend:** Node.js, Express.js, MongoDB (Mongoose)
 - **Frontend:** Angular, TypeScript, RxJS
 - **Authentication:** JWT (JSON Web Tokens)
 - **Other:** Postman (for API testing and generation)
+
+---
 
 ## Setup & Installation
 
@@ -72,9 +126,13 @@ The Gym & Fitness Membership Management System is a comprehensive platform desig
    ```
 4. Open your browser and navigate to `http://localhost:4200/`.
 
+---
+
 ## API Testing (Postman)
 
 A Postman collection is included for easy API testing and exploration. You can import the `postman/Gym-Management-API.postman_collection.json` file into your Postman app.
+
+---
 
 ## Key API Endpoints
 
@@ -111,6 +169,8 @@ A Postman collection is included for easy API testing and exploration. You can i
 - `PUT /api/admin/users/:id/assign-trainer` - Assign trainer to member
 - `GET /api/admin/memberships` - View all memberships
 - `POST /api/equipment` - Add new equipment
+
+---
 
 ## Contribution Note
 **Important:** Commit history should reflect contributions from multiple team members as per project requirements. All team members (Laya, Harshdeep, Abhishan) must actively push commits to the repository demonstrating their respective module ownership and involvement.
