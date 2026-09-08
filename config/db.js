@@ -7,32 +7,39 @@ const seedDemoData = async () => {
   const Class = require('../models/Class');
   const Equipment = require('../models/Equipment');
 
-  const userCount = await User.countDocuments();
-  if (userCount === 0) {
-    console.log('Seeding initial demo data...');
-    
-    // Seed Admin
-    const bcrypt = require('bcryptjs');
-    const salt = await bcrypt.genSalt(10);
-    const passwordHash = await bcrypt.hash('Password123!', salt);
+  console.log('Verifying demo seed accounts...');
+  const bcrypt = require('bcryptjs');
+  const salt = await bcrypt.genSalt(10);
+  const passwordHash = await bcrypt.hash('Password123!', salt);
 
-    const admin = await User.create({
+  // Seed Admin if missing
+  let admin = await User.findOne({ email: 'admin@gymland.com' });
+  if (!admin) {
+    admin = await User.create({
       name: 'System Admin',
       email: 'admin@gymland.com',
       passwordHash,
       role: 'BRANCH ADMIN'
     });
+    console.log('✅ Created admin@gymland.com');
+  }
 
-    // Seed Trainer User & Doc
-    const trainerUser = await User.create({
+  // Seed Trainer User & Doc if missing
+  let trainerUser = await User.findOne({ email: 'trainer@gymland.com' });
+  if (!trainerUser) {
+    trainerUser = await User.create({
       name: 'Coach Marcus',
       email: 'trainer@gymland.com',
       passwordHash,
       role: 'TRAINER',
       phone: '+1 555-0192'
     });
+    console.log('✅ Created trainer@gymland.com');
+  }
 
-    const trainer = await Trainer.create({
+  let trainer = await Trainer.findOne({ email: 'trainer@gymland.com' });
+  if (!trainer) {
+    trainer = await Trainer.create({
       userId: trainerUser._id,
       name: 'Coach Marcus',
       email: 'trainer@gymland.com',
@@ -42,9 +49,12 @@ const seedDemoData = async () => {
       rating: 4.9,
       ratingCount: 12
     });
+  }
 
-    // Seed Member User
-    const member = await User.create({
+  // Seed Member User if missing
+  let member = await User.findOne({ email: 'member@gymland.com' });
+  if (!member) {
+    member = await User.create({
       name: 'Alex Johnson',
       email: 'member@gymland.com',
       passwordHash,
@@ -59,9 +69,13 @@ const seedDemoData = async () => {
         relation: 'Spouse'
       }
     });
+    console.log('✅ Created member@gymland.com');
+  }
 
-    // Seed Plans
-    const plan1 = await MembershipPlan.create({
+  // Seed Plans if missing
+  const planCount = await MembershipPlan.countDocuments();
+  if (planCount === 0) {
+    await MembershipPlan.create({
       name: 'Monthly Iron Access',
       description: 'Full gym floor access & locker room',
       price: 60,
@@ -69,7 +83,7 @@ const seedDemoData = async () => {
       isActive: true
     });
 
-    const plan2 = await MembershipPlan.create({
+    await MembershipPlan.create({
       name: 'Quarterly Athlete',
       description: 'Full access + group classes included',
       price: 150,
@@ -77,15 +91,18 @@ const seedDemoData = async () => {
       isActive: true
     });
 
-    const plan3 = await MembershipPlan.create({
+    await MembershipPlan.create({
       name: 'Annual VIP Gold',
       description: 'Unlimited access + 2 free PT sessions + guest passes',
       price: 500,
       durationMonths: 12,
       isActive: true
     });
+  }
 
-    // Seed Classes
+  // Seed Classes if missing
+  const classCount = await Class.countDocuments();
+  if (classCount === 0) {
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
@@ -115,8 +132,11 @@ const seedDemoData = async () => {
       bookedCount: 5,
       room: 'Arena 2'
     });
+  }
 
-    // Seed Equipment
+  // Seed Equipment if missing
+  const equipCount = await Equipment.countDocuments();
+  if (equipCount === 0) {
     await Equipment.create({
       name: 'Hammer Strength Iso-Lateral Chest Press',
       serialNumber: 'EQ-CP-101',
@@ -137,9 +157,9 @@ const seedDemoData = async () => {
       category: 'FREE_WEIGHTS',
       status: 'OPERATIONAL'
     });
-
-    console.log('✅ Demo data seeded successfully (Admin, Trainer, Member, Plans, Classes, Equipment)!');
   }
+
+  console.log('✅ Demo accounts and data verified successfully!');
 };
 
 const connectDB = async () => {
